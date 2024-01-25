@@ -99,16 +99,14 @@ Module Module1
                 End If
             Next
         Loop Until swaps = False
-        'For i = 0 To n - 1
-        '    Console.WriteLine(a(i))
-        'Next
         Return a
     End Function
     Sub Main()
         Dim sw As New Stopwatch
         Dim numVals As Integer
         Dim n As New Random
-        Dim LinSearch As String
+        Dim Search As String
+        Dim looking As Integer
 
         sw.Reset()
         Console.Write("Enter the number of values: ")
@@ -121,37 +119,56 @@ Module Module1
             Console.WriteLine(nums(i))
         Next
 
-        'Console.WriteLine("pick a number for the function, 1 for bubble sort, 2 for merge sort, 3 for linear search")
-
-
-        Console.WriteLine("we will now sort this array")
-        sw.Start()
-        nums = BubbleSort(nums)
-        sw.Stop()
-        For i = 0 To (numVals - 1)
-            Console.WriteLine(nums(i))
-        Next
-        Console.WriteLine("It took " & sw.ElapsedMilliseconds & " miliseconds to sort (bubble)")
-        sw.Reset()
-        'sw.Start()
-        'nums = MergeSortRecursive(nums, 0, numVals) ' sort the array nums, starting from index 0
-        '' and ending at index numVals (The last index of the array)
-        'sw.Stop()
-        'Console.WriteLine("It took " & sw.ElapsedMilliseconds & " miliseconds to sort (merge)")
-        'sw.Reset()
-        'For i = 0 To numVals
-        '    Console.WriteLine(nums(i))
-        'Next
-
-        Dim looking As Integer
-        Console.WriteLine("What number are you looking for?")
-        looking = Convert.ToInt32(Console.ReadLine())
-        sw.Start()
-        LinSearch = LinearSearch(nums, looking)
-        sw.Stop()
-        Console.WriteLine(LinSearch)
-        Console.WriteLine("It took " & sw.ElapsedMilliseconds & " miliseconds (Linear)")
-
+        Dim choice As Integer
+        Do
+            Console.WriteLine("pick a number for the function, 1 for bubble sort, 2 for merge sort, 3 for linear search, 4 for Binary search")
+            choice = Convert.ToInt32(Console.ReadLine())
+            If choice = 1 Then
+                Console.WriteLine("we will now sort this array")
+                sw.Start()
+                nums = BubbleSort(nums)
+                sw.Stop()
+                For i = 0 To (numVals - 1)
+                    Console.WriteLine(nums(i))
+                Next
+                For i = 0 To numVals
+                    Console.WriteLine(nums(i))
+                Next
+                Console.WriteLine("It took " & sw.ElapsedMilliseconds & " miliseconds to sort (bubble)")
+                sw.Reset()
+            ElseIf choice = 2 Then
+                sw.Start()
+                nums = MergeSortRecursive(nums, 0, numVals)
+                sw.Stop()
+                For i = 0 To numVals
+                    Console.WriteLine(nums(i))
+                Next
+                Console.WriteLine("It took " & sw.ElapsedMilliseconds & " miliseconds to sort (merge)")
+                sw.Reset()
+            ElseIf choice = 3 Then
+                Console.WriteLine("What number are you looking for?")
+                looking = Convert.ToInt32(Console.ReadLine())
+                nums = BubbleSort(nums)
+                sw.Start()
+                Search = LinearSearch(nums, looking)
+                sw.Stop()
+                Console.WriteLine(Search)
+                Console.WriteLine("It took " & sw.ElapsedMilliseconds & " miliseconds (Linear)")
+                sw.Reset()
+            ElseIf choice = 4 Then
+                Console.WriteLine("What number are you looking for?")
+                looking = Convert.ToInt32(Console.ReadLine())
+                nums = BubbleSort(nums)
+                sw.Start()
+                Search = BinarySearch(nums, looking)
+                sw.Stop()
+                Console.WriteLine(Search)
+                Console.WriteLine("It took " & sw.ElapsedMilliseconds & " miliseconds (Binary)")
+                sw.Reset()
+            Else
+                Console.WriteLine("invalid input")
+            End If
+        Loop Until choice = 1 Or 2 Or 3 Or 4
 
     End Sub
 
