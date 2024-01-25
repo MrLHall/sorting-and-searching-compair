@@ -115,7 +115,7 @@ Module Module1
         For i = 0 To numVals
             nums(i) = n.Next(1, Integer.MaxValue)
         Next
-        For i = 0 To (numVals - 1)
+        For i = 0 To (numVals)
             Console.WriteLine(nums(i))
         Next
 
@@ -131,23 +131,20 @@ Module Module1
                 For i = 0 To (numVals - 1)
                     Console.WriteLine(nums(i))
                 Next
-                For i = 0 To numVals
-                    Console.WriteLine(nums(i))
-                Next
                 Console.WriteLine("It took " & sw.ElapsedMilliseconds & " miliseconds to sort (bubble)")
                 sw.Reset()
             ElseIf choice = 2 Then
                 sw.Start()
                 nums = MergeSortRecursive(nums, 0, numVals)
                 sw.Stop()
-                For i = 0 To numVals
+                For i = 0 To numVals - 1
                     Console.WriteLine(nums(i))
                 Next
                 Console.WriteLine("It took " & sw.ElapsedMilliseconds & " miliseconds to sort (merge)")
                 sw.Reset()
             ElseIf choice = 3 Then
                 Console.WriteLine("What number are you looking for?")
-                looking = Convert.ToInt32(Console.ReadLine())
+                looking = Convert.ToInt64(Console.ReadLine())
                 nums = BubbleSort(nums)
                 sw.Start()
                 Search = LinearSearch(nums, looking)
@@ -157,7 +154,7 @@ Module Module1
                 sw.Reset()
             ElseIf choice = 4 Then
                 Console.WriteLine("What number are you looking for?")
-                looking = Convert.ToInt32(Console.ReadLine())
+                looking = Convert.ToInt64(Console.ReadLine())
                 nums = BubbleSort(nums)
                 sw.Start()
                 Search = BinarySearch(nums, looking)
